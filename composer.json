@@ -1,0 +1,22 @@
+{
+    "name": "xdna/xdna",
+    "type" : "project",
+    "description": "xDNA is a MVC Enterprise Framework for multi app projects",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "keywords": ["mvc","framework","multi apps","enterprise"],
+    "authors": [
+        {
+            "name": "Luca Vignali",
+            "email": "luca@lhsgroup.net"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "4.0.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "xdna\\": "apps/xdna"
+        }
+    }
+}
