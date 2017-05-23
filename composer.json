@@ -16,7 +16,8 @@
     },
     "autoload": {
         "psr-4": {
-            "xdna\\": "apps/xdna"
+            "xdna\\": "apps/xdna",
+            "xdna\\core\\": "vendor/xdna/core"
         }
     }
 }

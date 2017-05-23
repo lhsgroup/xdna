@@ -1,6 +1,6 @@
 <?php
 namespace xdna\controller;
-class index {
-    public function __construct() {
-    }
+use \xdna\core as xCore;
+class index extends xCore\controller {
+    
 }
