@@ -2,11 +2,12 @@
 namespace xdna\core;
 class event {
     public $data;
-    public function __construct($data)
+    protected $event_name;
+    public function __construct($event_name)
     {
-        $this->data = $data;
+        $this->event_name = $event_name;
     }
-    public function fire() {
-        echo $this->data;
+    public function fire($data = []) {
+        var_dump($data);
     }
 }
