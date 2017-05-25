@@ -15,8 +15,8 @@ class appRouting implements iRouter {
             }
         };
     }
-    public function pageNotFound() {
-        die("Page not found");
+    public static function getView($uri) {
+        $url = implode("/",$uri);
+        die($url);
     }
-
 }

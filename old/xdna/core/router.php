@@ -43,11 +43,8 @@ class router {
                     return;
                 }
             }
-        } else { // page not found
-           //load default app and exec pageNotFound method
-            $app_class = '\\apps\\'.self::$_ENV['apps']['/'].'\\'.self::$_ENV['apps']['/'];
-            $app = new $app_class([]);
-            $app->pageNotFound();
+        } else { // case /app/view
+            die("Router not found");
         }
     }
 }
