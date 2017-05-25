@@ -1,11 +1,11 @@
 <?php
 namespace xdna\core;
 class fs {
-    private static $shared_path = 'shared';
+    private static $shared_path = 'shared_app';
     public static function getFullPath($class_name) {
         return explode("\\",$class_name);
     }
-    public static function getFile($app, $type,$name) {
+    public static function getFile($app, $type,$name) {       
         if(file_exists('apps/'.$app.'/'.$type.'/'.$name.'.php')) {
             return 'apps/'.$app.'/'.$type.'/'.$name.'.php';
         } else if(file_exists('apps/'.$app.'/'.$type.'/'.$name.'/index.php')) {
@@ -20,14 +20,18 @@ class fs {
         }
     }
     public static function getFileFromPath($path,$name) {
-        if(file_exists($path.'/'.$name.'.php')) {
-            return $path.'/'.$name.'.php';
+        //echo realpath($path.$name.'.php').'<br />';
+        //echo realpath($path.$name.'/index.php').'<br />';
+        //echo realpath(self::$shared_path.$name.'.php').'<br />';
+        //echo realpath(self::$shared_path.$name.'/index.php').'<br />';
+        if(file_exists($path.$name.'.php')) {
+            return $path.$name.'.php';
         } else if(file_exists($path.'/'.$name.'/index.php')) {
-            return $path.'/'.$name.'/index.php';
-        } else if(file_exists(self::$shared_path.'/'.$name.'.php')) {
-            return self::$shared_path.'/'.$name.'.php';
+            return $path.$name.'/index.php';
+        } else if(file_exists(self::$shared_path.$name.'.php')) {
+            return self::$shared_path.$name.'.php';
         } else if(file_exists(self::$shared_path.'/'.$name.'/index.php')) {
-            return self::$shared_path.'/'.$name.'/index.php';
+            return self::$shared_path.$name.'/index.php';
         } else {
           return;
         }

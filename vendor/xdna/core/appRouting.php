@@ -10,6 +10,7 @@ class appRouting implements iRouter {
                 $controller_class = str_replace("/","\\",$namespace)."\\controller";
                 $controller = new $controller_class($uri);
                 $controller->setView($f);
+                echo $controller;
                 return $controller;
             }
         };

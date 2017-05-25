@@ -1,2 +1,2 @@
 # xdna
-xDNA is a moder enterprise framework to create multi apps application
+xDNA is a modern enterprise framework to create multi applications project
