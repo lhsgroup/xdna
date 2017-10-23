@@ -20,10 +20,10 @@ class fs {
         }
     }
     public static function getFileFromPath($path,$name) {
-        /*echo realpath($path.$name.'.php').'<br />';
-        echo realpath($path.$name.'/index.php').'<br />';
-        echo realpath(self::$shared_path.$name.'.php').'<br />';
-        echo realpath(self::$shared_path.$name.'/index.php').'<br />';*/
+        //echo realpath($path.$name.'.php').'<br />';
+        //echo realpath($path.$name.'/index.php').'<br />';
+        //echo realpath(self::$shared_path.$name.'.php').'<br />';
+        //echo realpath(self::$shared_path.$name.'/index.php').'<br />';
         if(file_exists($path.$name.'.php')) {
             return $path.$name.'.php';
         } else if(file_exists($path.'/'.$name.'/index.php')) {

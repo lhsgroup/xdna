@@ -3,51 +3,29 @@ namespace xdna\core;
 class router {
     private static $app;
     public static $_ENV = [];
-    public static function init($url) {
+    public static function init($url=null) {
         self::$_ENV = fs::getEnv();
-        if (isset($url)) {
-            if(substr($url,-1) == '/') {
-                $url = substr($url,0,-1);
-            }
+        $url = isset($url) ? $url : '/';
+        if($url == '/' && isset( self::$_ENV['apps']['/'])) {
+            // default application
+            self::_startApp(self::$_ENV['apps']['/'],[]);
         } else {
-            $url = '/';
-        }        
-        if($url != '/') {
-            $uri = explode('/',$url);
-            array_shift($uri); // remove first empty value of /
-        } else {
-            //uri is /, default application, default index
-            $uri = [];
-        }
-        self::_startApp($uri);
-    }
-    private static function _handleApp($app_path,$uri) {
-        $app = '\\apps\\'.$app_path.'\\'.$app_path;
-        if($route_function = forward_static_call_array(array($app, 'get_route'),[$uri])) {
-            if(is_callable($route_function)) {
-                self::$app = new $app($uri);
-                return $route_function($uri);
-            }
-        } else {
-            //TODO: view index not found
-        }
-    }
-
-    private static function _startApp($uri) {
-        if(self::_handleApp(self::$_ENV['apps']['/'],$uri)) { // case /
-           return;
-        } else if(count($uri) >0 && isset(self::$_ENV['apps']['/'.$uri[0]])) { // case /app/
+            $path_parts = pathinfo($url);
+            $uri = explode("/",$url);
+            // remove first /
             array_shift($uri);
-            foreach(self::$_ENV['apps'] as $path=>$app_name) {
-                if($path != '/' && self::_handleApp($app_name,$uri)) {
-                    return;
-                }
+            if(isset(self::$_ENV['apps']['/'.$uri[0]])) {
+                $path = self::$_ENV['apps']['/'.$uri[0]];
+                $prefix = array_shift($uri);
+            } else {
+                $path = $path = self::$_ENV['apps']['/'];
+                $prefix = '';
             }
-        } else { // page not found
-           //load default app and exec pageNotFound method
-            $app_class = '\\apps\\'.self::$_ENV['apps']['/'].'\\'.self::$_ENV['apps']['/'];
-            $app = new $app_class([]);
-            $app->pageNotFound();
+            self::_startApp($path,(array) $uri,$prefix);
         }
+    }
+    public static function _startApp($app_name,$uri_array=[],$prefix=null) {
+        $app_class = '\\apps\\'.$app_name.'\\'.$app_name;
+        $app_class::start($uri_array,$prefix);
     }
 }

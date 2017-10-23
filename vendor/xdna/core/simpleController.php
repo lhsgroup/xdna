@@ -4,10 +4,6 @@ class simpleController {
     public $uri = [];
     public $viewContent = '';
     public $layout = 'index';
-    public function redirect($url) {
-        header('Location: '.$url);
-        exit;
-    }
     public function __get($name) {
         //load component logic
         if($f = $this->getFile('/component/'.$name)) {

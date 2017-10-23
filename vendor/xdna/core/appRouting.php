@@ -1,22 +1,14 @@
 <?php
 namespace xdna\core;
-class appRouting implements iRouter {
-    public static function get_route($uri = []){
-        return function() use ($uri) {
-            $class = new \ReflectionClass(static::class);
-            $namespace =  str_replace("\\","/",$class->getNamespaceName());
-            // looking for a view
-            if($f = fs::getFileFromPath($namespace,'/view/'.implode('/',$uri))) {
-                $controller_class = str_replace("/","\\",$namespace)."\\controller";
-                $controller = new $controller_class($uri);
-                $controller->setView($f);
-                echo $controller;
-                return $controller;
-            }
-        };
+class appRouting implements iApp {
+    public static function handleRouter($array_route=[],$prefix = null) {
+        var_dump($array_route);
+        echo '<hr />'.$prefix;
+
+        die();
     }
-    public function pageNotFound() {
-        die("Page not found");
+    public static function start($array_route=[],$prefix=null) {
+        self::handleRouter($array_route,$prefix);
     }
 
 }

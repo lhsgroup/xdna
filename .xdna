@@ -9,5 +9,6 @@ db_password = {db_password}
 [application]
 
 apps[/] = home
+apps[/it] = home
 
 
