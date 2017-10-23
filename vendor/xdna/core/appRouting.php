@@ -8,7 +8,7 @@ class appRouting implements iApp {
         die();
     }
     public static function start($array_route=[],$prefix=null) {
-        self::handleRouter($array_route,$prefix);
+        static::handleRouter($array_route,$prefix);
     }
 
 }
