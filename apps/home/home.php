@@ -7,8 +7,9 @@ class home extends xCore\appRouting {
       exit;
   }
     public static function _handleRouter($array_route=[],$prefix = null) { // remove _ to update router function
-
+        die($prefix);
     }
+
 }
 
 

@@ -1,7 +1,6 @@
 <?php
 namespace xdna\core;
 class fs {
-    private static $shared_path = 'shared_app';
     public static function getFullPath($class_name) {
         return explode("\\",$class_name);
     }
