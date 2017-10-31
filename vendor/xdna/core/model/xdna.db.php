@@ -42,7 +42,7 @@ class xdna_db {
 	}
     public static function query($sql,$params=array()) {
 		 if(!self::$isConnected){
-            self::connect('root', 'sf32yoiOzB', 'xDNA');
+            self::connect('', '', '');
         }
 		$result = self::$db->prepare($sql);
 		if($params) {
