@@ -1,10 +1,10 @@
 ; This is a configuraton file
 
 [database]
-db_host = {db_host}
-db_name = {db_name}
-db_user = {db_user}
-db_password = {db_password}
+db_host = localhost
+db_name = xdna
+db_user = xdna
+db_password = password
 
 [application]
 

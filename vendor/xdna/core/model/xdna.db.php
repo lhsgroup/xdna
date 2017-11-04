@@ -3,7 +3,7 @@
 /**
  * Classe xdna
  *
- * @author luca
+ * @author luca/alberto
  */
 function NOW(){
 	return date("Y-m-d H:i:s");
@@ -42,7 +42,7 @@ class xdna_db {
 	}
     public static function query($sql,$params=array()) {
 		 if(!self::$isConnected){
-            self::connect('', '', '');
+            self::connect('xdna', 'password', 'xdna');
         }
 		$result = self::$db->prepare($sql);
 		if($params) {

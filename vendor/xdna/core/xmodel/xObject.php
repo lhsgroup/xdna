@@ -14,15 +14,10 @@
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-namespace xdna\core;
-class event {
-    public $data;
-    protected $event_name;
-    public function __construct($event_name)
-    {
-        $this->event_name = $event_name;
-    }
-    public function fire($data = []) {
-        var_dump($data);
-    }
+
+namespace xdna\core\xmodel;
+
+
+class xObject {
+
 }

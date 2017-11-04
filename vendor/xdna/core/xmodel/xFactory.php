@@ -14,46 +14,20 @@
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-namespace xdna\core;
-class simpleController {
-    public $uri = [];
-    public $viewContent = '';
-    public $layout = 'index';
-    public function __get($name) {
-        //load component logic
-        if($f = $this->getFile('/component/'.$name)) {
-            ob_start();
-            include $f;
-            return  ob_get_clean();
-        } else {
-            return;
-        }
-    }
 
-    public function __construct($uri) {
-        $this->uri = $uri;
-    }
-    public function setView($url) {
-        ob_start();
-        include $url;
-        $this->viewContent = ob_get_clean();
-    }
-    public function setLayout($layout) {
-        $this->layout = $layout;
-    }
-    public function __toString() {
-        return $this->RenderLayout;
-    }
-    public static function getPath() {
-        $class = new \ReflectionClass(static::class);
-        return str_replace("\\","/",$class->getNamespaceName());
-    }
-    protected function getFile($file_name) {
-        $path = self::getPath();
-        if($f = fs::getFileFromPath($path,$file_name)) {
-            return $f;
+namespace xdna\core\xmodel;
+use \xdna\core\db as db;
+
+class xFactory {
+    public static function createList($list_name, $id_parent=null) {
+        if(!static::_listExists($list_name,$id_parent)) {
+
         } else {
-            return;
+            throw new \Exception("Unable to create list ".$list_name.' with parent_id = '.$id_parent.'! the list name already exists');
         }
+    }
+    private static function _listExists($list_name, $id_parent=null) {
+        $result = db::query("SELECT count(*) as c FROM `xdna_lists` WHERE `name` = :list_name AND id_parent ".db::EQUAL($id_parent).' :id_parent',array("list_name" => $list_name, "id_parent" =>$id_parent));
+        return ($result->c===0);
     }
 }
